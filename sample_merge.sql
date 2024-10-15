@@ -1,6 +1,7 @@
 -- Databricks notebook source
-CREATE TEMPORARY VIEW new_logs    AS
-select column1
-    ,col2,
+CREATE TEMPORARY VIEW new_logs AS
+SELECT
+    column1,
+    col2,
     col3
-from(SELECT DISTINCT * FROM tbl);
+FROM (SELECT DISTINCT * FROM tbl);
