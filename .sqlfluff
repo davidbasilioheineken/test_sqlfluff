@@ -13,7 +13,6 @@ layout.spacing_around_operators = consistent
 layout.spacing_around_keywords = consistent
 layout.indentation = spaces
 layout.indent_unit = 4
-layout.comma_style = leading
 layout.line_length = 80
 
 # Aliasing Rules
