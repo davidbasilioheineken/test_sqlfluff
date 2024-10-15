@@ -11,10 +11,10 @@ L022 = True  ; Use `AS` for aliasing
 L043 = True  ; Standardize the use of commas
 L055 = True  ; Consistent use of quotes for string literals
 
-[sqlfluff:rules:L001]  ; Line length limits section
+[L001]  ; Line length limits section
 max_line_length = 80  ; Set your preferred line length
 
-[sqlfluff:rules:LT02]
+[LT02]
 indent_unit = 4  ; Number of spaces for indentation
 
 [sqlfluff:layout:type:comma]

@@ -22,3 +22,11 @@ jobs:
 
     - name: Fix SQL
       run: sqlfluff fix sample_merge.sql
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name 'davidbasilioheineken'
+        git config --global user.email 'davidbasilio.rodriguezcortez@heineken.com'
+        git add sample_merge.sql
+        git commit -m 'Auto-fix SQL file with SQLFluff'
+        git push origin HEAD:${{ github.head_ref }}
