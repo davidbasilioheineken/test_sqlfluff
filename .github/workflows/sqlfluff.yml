@@ -20,11 +20,10 @@ jobs:
     - name: Lint SQL
       run: sqlfluff lint sample_merge.sql
 
-    - name: Fix SQL
-      run: sqlfluff fix sample_merge.sql
-
-    - name: Commit and Push Changes
+    - name: Fix SQL if Lint Fails
+      if: failure()
       run: |
+        sqlfluff fix sample_merge.sql
         git config --global user.name 'davidbasilioheineken'
         git config --global user.email 'davidbasilio.rodriguezcortez@heineken.com'
         git add sample_merge.sql
