@@ -38,10 +38,6 @@ operator_spacing = 1
 # Enforce consistent indentation
 indentation = 4
 
-[sqlfluff:rules:LT04]
-# Ensure commas are placed correctly in lists
-comma_style = leading
-
 [sqlfluff:rules:LT05]
 # Handle long lines by breaking them appropriately
 line_length = 80
