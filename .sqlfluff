@@ -1,79 +1,23 @@
 [sqlfluff]
-# Define the dialect of SQL you're using
 dialect = databricks
 
 [sqlfluff:rules]
-# Capitalization Rules
-capitalisation.keywords = upper
-capitalisation.identifiers = lower
-capitalisation.functions = upper
+# General rules
+L010 = True  ; Uppercase keywords
+L014 = True  ; No trailing whitespace
+L025 = True  ; No consecutive empty lines
 
-# Layout Rules
-layout.spacing_around_operators = consistent
-layout.spacing_around_keywords = consistent
-layout.indentation = spaces
-layout.indent_unit = 4
-layout.line_length = 80
+# Formatting rules
+L003 = True  ; Line length limits
+L031 = True  ; No spaces around operators
+L035 = True  ; Spaces around parentheses
+L037 = True  ; Consistent indentation
 
-# Aliasing Rules
-aliasing.table = explicit
-aliasing.column = explicit
-aliasing.unused = avoid
+# Style rules
+L022 = True  ; Use `AS` for aliasing
+L043 = True  ; Standardize the use of commas
+L055 = True  ; Consistent use of quotes for string literals
 
-# Convention Rules
-convention.comparison_operators = consistent
-convention.trailing_commas = true
-convention.statement_terminators = true
-
-# Structure Rules
-structure.case_else_null = true
-structure.simplify_case = true
-structure.avoid_subqueries = true
-
-[sqlfluff:rules:LT01]
-# Ensure consistent spacing around operators and keywords
-operator_spacing = 1
-
-[sqlfluff:rules:LT02]
-# Enforce consistent indentation
-indentation = 4
-
-[sqlfluff:rules:LT05]
-# Handle long lines by breaking them appropriately
-line_length = 80
-
-[sqlfluff:rules:AL01]
-# Enforce explicit aliasing of tables
-table_aliases = explicit
-
-[sqlfluff:rules:AL02]
-# Enforce explicit aliasing of columns
-column_aliases = explicit
-
-[sqlfluff:rules:AL05]
-# Avoid unused aliases to keep the code clean
-unused_aliases = avoid
-
-[sqlfluff:rules:CV01]
-# Use consistent comparison operators (e.g., != vs <>)
-comparison_operators = consistent
-
-[sqlfluff:rules:CV03]
-# Ensure trailing commas in select statements
-trailing_commas = true
-
-[sqlfluff:rules:CV06]
-# Enforce statement terminators (e.g., semicolons)
-statement_terminators = true
-
-[sqlfluff:rules:ST01]
-# Ensure ELSE in CASE statements returns NULL if not specified
-case_else_null = true
-
-[sqlfluff:rules:ST02]
-# Simplify CASE statements where possible
-simplify_case = true
-
-[sqlfluff:rules:ST05]
-# Avoid unnecessary subqueries
-avoid_subqueries = true
+[sqlfluff:rules:L001]
+# Example of customizing a specific rule
+max_line_length = 80  ; Set your preferred line length
