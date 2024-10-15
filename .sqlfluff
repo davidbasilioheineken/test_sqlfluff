@@ -1,0 +1,84 @@
+[sqlfluff]
+# Define the dialect of SQL you're using
+dialect = databricks
+
+[sqlfluff:rules]
+# Capitalization Rules
+capitalisation.keywords = upper
+capitalisation.identifiers = lower
+capitalisation.functions = upper
+
+# Layout Rules
+layout.spacing_around_operators = consistent
+layout.spacing_around_keywords = consistent
+layout.indentation = spaces
+layout.indent_unit = 4
+layout.comma_style = leading
+layout.line_length = 80
+
+# Aliasing Rules
+aliasing.table = explicit
+aliasing.column = explicit
+aliasing.unused = avoid
+
+# Convention Rules
+convention.comparison_operators = consistent
+convention.trailing_commas = true
+convention.statement_terminators = true
+
+# Structure Rules
+structure.case_else_null = true
+structure.simplify_case = true
+structure.avoid_subqueries = true
+
+[sqlfluff:rules:LT01]
+# Ensure consistent spacing around operators and keywords
+operator_spacing = 1
+
+[sqlfluff:rules:LT02]
+# Enforce consistent indentation
+indentation = 4
+
+[sqlfluff:rules:LT04]
+# Ensure commas are placed correctly in lists
+comma_style = leading
+
+[sqlfluff:rules:LT05]
+# Handle long lines by breaking them appropriately
+line_length = 80
+
+[sqlfluff:rules:AL01]
+# Enforce explicit aliasing of tables
+table_aliases = explicit
+
+[sqlfluff:rules:AL02]
+# Enforce explicit aliasing of columns
+column_aliases = explicit
+
+[sqlfluff:rules:AL05]
+# Avoid unused aliases to keep the code clean
+unused_aliases = avoid
+
+[sqlfluff:rules:CV01]
+# Use consistent comparison operators (e.g., != vs <>)
+comparison_operators = consistent
+
+[sqlfluff:rules:CV03]
+# Ensure trailing commas in select statements
+trailing_commas = true
+
+[sqlfluff:rules:CV06]
+# Enforce statement terminators (e.g., semicolons)
+statement_terminators = true
+
+[sqlfluff:rules:ST01]
+# Ensure ELSE in CASE statements returns NULL if not specified
+case_else_null = true
+
+[sqlfluff:rules:ST02]
+# Simplify CASE statements where possible
+simplify_case = true
+
+[sqlfluff:rules:ST05]
+# Avoid unnecessary subqueries
+avoid_subqueries = true
