@@ -1,0 +1,24 @@
+name: SQLFluff Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install SQLFluff
+      run: pip install sqlfluff
+
+    - name: Lint SQL
+      run: sqlfluff lint sample_merge.sql
+
+    - name: Fix SQL
+      run: sqlfluff fix sample_merge.sql
