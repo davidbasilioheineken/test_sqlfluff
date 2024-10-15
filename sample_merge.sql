@@ -10,7 +10,7 @@ FROM (SELECT DISTINCT * FROM tbl);
 
 -- Create a temporary view with distinct rows and enriched data from user_info
 CREATE TEMPORARY VIEW NEW_DEDUPED_LOGS_VIEW AS
-select *
+select col1
 from (select distinct * from dedupedLogs)
 join user_info using(user_id);
 
