@@ -4,6 +4,3 @@ CREATE TEMPORARY VIEW NEW_DEDUPED_LOGS_VIEW  AS
 select *
 from (select distinct * from tbl_)
 join user_info using(user_id);
-
--- Perform the MERGE operation
-merge into logs using new_deduped_logs_view on logs.uniqueid = new_deduped_logs_view.uniqueid when not matched then insert *;
