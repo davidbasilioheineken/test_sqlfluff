@@ -1,27 +1,2 @@
 [sqlfluff]
 dialect = databricks
-exclude_rules = L042
-
-[sqlfluff:rules]
-L010 = True  ; Uppercase keywords
-L014 = True  ; No trailing whitespace
-L025 = True  ; No consecutive empty lines
-
-[L001]  ; Line length limits section
-max_line_length = 80  ; Set your preferred line length
-
-[sqlfluff:rules:layout.indent]
-indent_unit = 4  ; Number of spaces for indentation
-
-[sqlfluff:layout:type:comma]
-line_position = trailing  ; Set comma placement to trailing
-
-[sqlfluff:rules:layout]
-L031 = True  ; No spaces around operators
-L035 = True  ; Spaces around parentheses
-L037 = True  ; Consistent indentation
-L022 = True  ; Use `AS` for aliasing
-L043 = True  ; Standardize the use of commas
-L055 = True  ; Consistent use of quotes for string literals
-L009 = True  ; 
-L044 = True  ; Limit complexity of SQL statements
