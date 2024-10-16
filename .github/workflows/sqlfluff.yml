@@ -21,14 +21,14 @@ jobs:
       run: pip install sqlfluff
 
     - name: Lint SQL
-      run: sqlfluff lint sample_merge.sql
+      run: sqlfluff lint code/
 
     - name: Fix SQL if Lint Fails
       if: failure()
       run: |
-        sqlfluff fix sample_merge.sql
+        sqlfluff fix code/
         git config --global user.name 'davidbasilioheineken'
         git config --global user.email 'davidbasilio.rodriguezcortez@heineken.com'
-        git add sample_merge.sql
+        git add code/
         git commit -m 'Auto-fix SQL file with SQLFluff'
         git push origin HEAD:${{ github.ref }}
