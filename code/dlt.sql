@@ -17,6 +17,8 @@ TBLPROPERTIES
   "source" = "SAP"
 );
 
+-- COMMAND ----------
+
 APPLY CHANGES INTO LIVE.tbl_stg_mae 
 FROM STREAM(heiaepmx001dwe01.heiaepmxddb_ing.tbl_ing_mae)
   KEYS (NUM_CLIENTE, ORG_VENTAS)
