@@ -33,7 +33,7 @@ jobs:
         else
           echo "New or modified files:"
           echo "$FILES"
-          echo "::set-output name=changed_files::$FILES"  # Set output variable
+          echo "::set-output name=changed_files::$FILES"
         fi
 
     - name: Lint SQL
