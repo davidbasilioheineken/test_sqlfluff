@@ -27,8 +27,8 @@ jobs:
       if: failure()
       run: |
         sqlfluff fix code/
-        git config --global user.name 'davidbasilioheineken'
-        git config --global user.email 'davidbasilio.rodriguezcortez@heineken.com'
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
         git add code/
         git commit -m 'Auto-fix SQL file with SQLFluff'
         git push origin HEAD:${{ github.ref }}
