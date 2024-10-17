@@ -20,6 +20,22 @@ jobs:
     - name: Install SQLFluff
       run: pip install sqlfluff
 
+    - name: Identify new or modified files
+      id: file_changes
+      run: |
+        # Get the list of new or modified files
+        echo "Identifying new or modified files..."
+        git fetch origin main  # Fetch the main branch
+        FILES=$(git diff --name-only HEAD origin/main)
+
+        if [ -z "$FILES" ]; then
+          echo "No new or modified files."
+        else
+          echo "New or modified files:"
+          echo "$FILES"
+          echo "::set-output name=changed_files::$FILES"  # Set output variable
+        fi
+
     - name: Lint SQL
       run: |
         if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
