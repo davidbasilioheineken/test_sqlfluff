@@ -1,0 +1,34 @@
+name: SQLFluff Lint
+
+on: [push, pull_request]
+
+permissions:
+  contents: write
+  
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install SQLFluff
+      run: pip install sqlfluff
+
+    - name: Lint SQL
+      run: sqlfluff lint code/
+
+    - name: Fix SQL if Lint Fails
+      if: failure()
+      run: |
+        sqlfluff fix code/
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+        git add code/
+        git commit -m 'Auto-fix SQL file with SQLFluff'
+        git push origin HEAD:${{ github.ref }}
