@@ -21,14 +21,19 @@ jobs:
       run: pip install sqlfluff
 
     - name: Lint SQL
-      run: sqlfluff lint code/
-
+      run: |
+        if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
+        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        else
+          echo "No files to process."
+        fi
+        
     - name: Fix SQL if Lint Fails
       if: failure()
       run: |
-        sqlfluff fix code/
+        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-        git add code/
-        git commit -m 'Auto-fix SQL file with SQLFluff'
+        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs git add
+        git commit -m 'Auto-fix SQL file(s) with SQLFluff'
         git push origin HEAD:${{ github.ref }}
