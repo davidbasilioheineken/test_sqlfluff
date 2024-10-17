@@ -25,8 +25,7 @@ jobs:
       run: |
         # Get the list of new or modified files
         echo "Identifying new or modified files..."
-        git fetch origin main  # Fetch the main branch
-        FILES=$(git diff --name-only HEAD origin/main)
+        FILES=$(git diff --name-only HEAD^ HEAD)
 
         if [ -z "$FILES" ]; then
           echo "No new or modified files."
