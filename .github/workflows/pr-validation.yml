@@ -1,0 +1,20 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from dev branch
+        if: github.event.pull_request.head.ref == 'dev'
+        run: echo "Pull request from dev to main is allowed."
+
+      - name: Restrict PRs from personal branches
+        if: github.event.pull_request.head.ref != 'dev'
+        run: |
+          echo "Pull requests from personal branches to main are not allowed."
+          exit 1
