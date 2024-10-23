@@ -38,7 +38,7 @@ jobs:
     - name: Lint SQL
       id: lint_sql
       run: |
-        if [ -z ${{ env.FILES }} ]; then
+        if [ -n "${{ env.FILES }}" ]; then
         echo "${{env.FILES}}" | xargs sqlfluff lint
         else
           echo "No files to process."
