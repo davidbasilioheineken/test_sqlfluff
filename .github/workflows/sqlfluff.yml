@@ -29,7 +29,7 @@ jobs:
         else
           echo "New or modified files:"
           echo "$FILES"
-          # echo "changed_files=$FILES" >> $GITHUB_OUTPUT
+          echo "changed_files=$FILES" >> $GITHUB_OUTPUT
         fi
 
     - name: Install SQLFluff
@@ -38,8 +38,8 @@ jobs:
     - name: Lint SQL
       id: lint_sql
       run: |
-        if [ -n "$FILES" ]; then
-        echo "$FILES" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
+        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
         else
           echo "No files to process."
         fi
