@@ -46,9 +46,10 @@ jobs:
         else
           echo "No files to process."
         fi
+      continue-on-error: true
         
     - name: Fix SQL if Lint Fails
-      if: steps.lint_sql.outcome != 'success'
+      # if: failure()
       run: |
         echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
