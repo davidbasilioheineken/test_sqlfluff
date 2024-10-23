@@ -23,10 +23,9 @@ jobs:
       id: file_changes
       run: |
         echo "Identifying new or modified files..."
-        files=$(git diff --name-only HEAD^ HEAD)
+        files=$(git diff --name-only HEAD^ HEAD | grep '\.sql$')
         if [ -z "$files" ]; then
           echo "No new or modified files."
-          exit 1
         else
           echo "New or modified files:"
           echo "$files"
