@@ -48,7 +48,7 @@ jobs:
         fi
         
     - name: Fix SQL if Lint Fails
-      if: steps.lint_sql.outcome == 'failure'
+      if: steps.lint_sql.outcome != 'success'
       run: |
         echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"

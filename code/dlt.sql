@@ -1,5 +1,5 @@
 -- Databricks notebook source
-CREATE OR REFRESH STREAMING TABLE tbl_stg_mae
+CREATE or REFRESH STREAMING TABLE tbl_stg_mae
 (
     CONSTRAINT valid_records
     EXPECT (
