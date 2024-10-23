@@ -31,7 +31,7 @@ jobs:
         fi
 
     - name: test environment
-      run: echo ${{ env.FILES }}"
+      run: echo $FILES
 
     - name: Install SQLFluff
       run: pip install sqlfluff
