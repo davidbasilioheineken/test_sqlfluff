@@ -32,16 +32,13 @@ jobs:
           echo "FILES=$files" >> $GITHUB_ENV
         fi
 
-    - name: test environment
-      run: echo "${{env.FILES}}"
-
     - name: Install SQLFluff
       run: pip install sqlfluff
 
     - name: Lint SQL
       id: lint_sql
       run: |
-        if [ -n ${{ env.FILES }} ]; then
+        if [ -z ${{ env.FILES }} ]; then
         echo "${{env.FILES}}" | xargs sqlfluff lint
         else
           echo "No files to process."
