@@ -17,15 +17,12 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install SQLFluff
-      run: pip install sqlfluff
-
     - name: Identify new or modified files
       id: file_changes
       run: |
         # Get the list of new or modified files
         echo "Identifying new or modified files..."
-        FILES=$(git diff --name-only HEAD^ HEAD | grep '\.sql$')
+        FILES=$(git diff --name-only HEAD | grep '\.sql$')
 
         if [ -z "$FILES" ]; then
           echo "No new or modified files."
@@ -34,6 +31,9 @@ jobs:
           echo "$FILES"
           echo "changed_files=$FILES" >> $GITHUB_OUTPUT
         fi
+
+    - name: Install SQLFluff
+      run: pip install sqlfluff
 
     - name: Lint SQL
       id: lint_sql
