@@ -6,7 +6,7 @@ CREATE or REFRESH STREAMING TABLE tbl_stg_mae
         num_cliente IS NOT NULL
         and nombre_cliente IS NOT NULL
     )
-    ON VIOLATION DROP ROW
+    on VIOLATION DROP ROW
 )
 COMMENT "This table contains all valid records for MAE"
     
