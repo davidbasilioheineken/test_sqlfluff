@@ -36,6 +36,7 @@ jobs:
         fi
 
     - name: Lint SQL
+      id: lint_sql
       run: |
         if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
         echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
@@ -44,7 +45,7 @@ jobs:
         fi
         
     - name: Fix SQL if Lint Fails
-      if: failure()
+      if: steps.lint_sql.conclusion == 'failure'
       run: |
         echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
