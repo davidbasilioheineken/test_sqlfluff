@@ -20,7 +20,6 @@ jobs:
     - name: Identify new or modified files
       id: file_changes
       run: |
-        # Get the list of new or modified files
         echo "Identifying new or modified files..."
         FILES=$(git diff --name-only | grep '\.sql$')
 
