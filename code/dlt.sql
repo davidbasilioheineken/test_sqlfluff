@@ -9,6 +9,7 @@ CREATE OR REFRESH STREAMING TABLE tbl_stg_mae
     ON VIOLATION DROP ROW
 )
 COMMENT "This table contains all valid records for MAE"
+    
     TBLPROPERTIES
     (
         "quality" = "silver",

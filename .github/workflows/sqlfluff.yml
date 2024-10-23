@@ -42,8 +42,8 @@ jobs:
     - name: Lint SQL
       id: lint_sql
       run: |
-        if [ -n ${{ env.FILES }}" ]; then
-        echo ${{ env.FILES }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        if [ -n ${{ env.FILES }} ]; then
+        echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
         else
           echo "No files to process."
         fi
@@ -51,7 +51,7 @@ jobs:
     - name: Fix SQL if Lint Fails
       if: steps.lint_sql.conclusion == 'failure'
       run: |
-        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
+        echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
         git add .
