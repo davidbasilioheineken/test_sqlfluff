@@ -21,6 +21,7 @@ COMMENT "This table contains all valid records for MAE"
 
 APPLY CHANGES INTO live.tbl_stg_mae
 FROM STREAM(heiaepmx001dwe01.heiaepmxddb_ing.tbl_ing_mae)
-KEYS (num_cliente, org_ventas)
-SEQUENCE BY processed_date
-STORED AS SCD TYPE 2;
+KEYS(num_cliente,
+org_ventas)
+SEQUENCE  by processed_date
+STORED AS SCD TYPE  1;
