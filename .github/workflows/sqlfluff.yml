@@ -27,7 +27,7 @@ jobs:
         else
           echo "New or modified files:"
           echo "$FILES"
-          echo "changed_files=$FILES" >> $GITHUB_OUTPUT
+          echo "FILES=$FILES" >> $GITHUB_ENV
         fi
 
     - name: Install SQLFluff
