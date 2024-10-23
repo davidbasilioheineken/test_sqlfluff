@@ -27,7 +27,7 @@ jobs:
         else
           echo "New or modified files:"
           echo "$FILES"
-          echo "FILES=$FILES" >> $GITHUB_ENV
+          # echo "FILES=$files" >> $GITHUB_ENV
         fi
 
     - name: test environment
