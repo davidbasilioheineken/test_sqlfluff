@@ -23,7 +23,7 @@ jobs:
       id: file_changes
       run: |
         echo "Identifying new or modified files..."
-        files=$(git diff --name-only HEAD^ HEAD | grep '\.sql$')
+        files=$(git diff --name-only HEAD^ HEAD | grep '\.sql$ | tr '\n' ' '')
         if [ -z "$files" ]; then
           echo "No new or modified files."
         else
@@ -42,7 +42,7 @@ jobs:
       id: lint_sql
       run: |
         if [ -n ${{ env.FILES }} ]; then
-        echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        echo "${{env.FILES}}" | xargs sqlfluff lint
         else
           echo "No files to process."
         fi
@@ -51,7 +51,7 @@ jobs:
     - name: Fix SQL if Lint Fails
       if: steps.lint_sql.outcome == 'failure'
       run: |
-        echo "${{env.FILES}}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
+        echo "${{env.FILES}}" | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
         git add .
