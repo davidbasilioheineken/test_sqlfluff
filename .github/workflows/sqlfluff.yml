@@ -36,8 +36,8 @@ jobs:
     - name: Lint SQL
       id: lint_sql
       run: |
-        if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
-        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        if [ -n ${{ env.FILES }}" ]; then
+        echo ${{ env.FILES }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
         else
           echo "No files to process."
         fi
