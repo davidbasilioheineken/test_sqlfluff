@@ -30,7 +30,7 @@ jobs:
           echo "FILES=$FILES" >> $GITHUB_ENV
         fi
 
-    - name: test
+    - name: test environment
     - run: echo ${{ env.FILES }}"
 
     - name: Install SQLFluff
