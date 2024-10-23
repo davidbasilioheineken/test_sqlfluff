@@ -25,4 +25,4 @@ FROM STREAM(heiaepmx001dwe01.heiaepmxddb_ing.tbl_ing_mae)
 KEYS(num_cliente,
 org_ventas)
 SEQUENCE  by processed_date
-STORED AS SCD TYPE  2;
+STORED AS SCD TYPE   2;
