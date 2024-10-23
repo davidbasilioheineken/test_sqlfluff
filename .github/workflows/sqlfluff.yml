@@ -21,17 +21,17 @@ jobs:
       id: file_changes
       run: |
         echo "Identifying new or modified files..."
-        FILES=$(git diff --name-only)
-        if [ -z "$FILES" ]; then
+        files=$(git diff --name-only)
+        if [ -z "$files" ]; then
           echo "No new or modified files."
         else
           echo "New or modified files:"
-          echo "$FILES"
-          # echo "FILES=$files" >> $GITHUB_ENV
+          echo "$files"
+          echo "FILES=$files" >> $GITHUB_ENV
         fi
 
     - name: test environment
-      run: echo "$FILES"
+      run: echo "${{env.FILES}}"
 
     - name: Install SQLFluff
       run: pip install sqlfluff
