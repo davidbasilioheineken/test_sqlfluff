@@ -1,29 +1,27 @@
 -- Databricks notebook source
-CREATE OR REFRESH STREAMING TABLE tbl_stg_mae
-(
-    CONSTRAINT valid_records
-    EXPECT (
-        num_cliente IS NOT NULL
-        AND nombre_cliente IS NOT NULL
+create or refresh streaming table tbl_stg_mae (
+    constraint valid_records
+    expect (
+        num_cliente is not null
+        and nombre_cliente is not null
     )
-    ON VIOLATION DROP ROW
+    on violation drop row
 )
-COMMENT "This table contains all valid records for MAE"
+comment "this table contains all valid records for mae"
 
-    TBLPROPERTIES
-    (
-        "quality" = "silver",
-        "delta.enableChangeDataFeed" = "true",
-        "department" = "Sales Growth Planning",
-        "source" = "SAP"
-    );
+tblproperties (
+    "quality" = "silver",
+    "delta.enablechangedatafeed" = "true",
+    "department" = "sales growth planning",
+    "source" = "sap"
+);
 
 -- COMMAND ----------
 
-APPLY CHANGES INTO live.tbl_stg_mae
-FROM STREAM(heiaepmx001dwe01.heiaepmxddb_ing.tbl_ing_mae)
+APPLY CHANGES INTO live.TBL_MAE
+FROM STREAM(heiaepmx001dwe01.heiaepmxddb_ing.TBL_MAE_ING)
 KEYS (
-    num_cliente, org_ventas
+    num_cliente,org_ventas
 )
 SEQUENCE BY processed_date
-STORED AS SCD TYPE 2;
+STORED AS SCD  TYPE 2;
