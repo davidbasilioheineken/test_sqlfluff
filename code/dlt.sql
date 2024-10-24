@@ -1,5 +1,5 @@
 -- Databricks notebook source
-CREATE OR REFRESH STREAMING TABLE tbl_MAE (
+CREATE OR REFRESH STREAMING TABLE tbl_mae (
     CONSTRAINT valid_records
     EXPECT (
         num_cliente2 IS NOT NULL
