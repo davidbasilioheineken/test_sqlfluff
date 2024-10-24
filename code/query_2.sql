@@ -1,7 +1,7 @@
 -- Databricks notebook source
 SELECT
-    p.country mex,
-    p.churn c,
+    p.country AS mex,
+    p.churn AS c,
     COUNT(*) AS customers
 FROM `main`.`dbdemos_retail_c360`.churn_features AS p
 GROUP BY p.country, p.churn
