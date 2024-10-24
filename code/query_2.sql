@@ -9,12 +9,12 @@ GROUP BY p.country, p.churn
 -- COMMAND ----------
 
 SELECT
-    canal,
-    SUM(amount) / 100 AS mrr
-FROM `main`.`dbdemos_retail_c360`.churn_orders
+    c.canal,
+    SUM(u.amount) / 100 AS mrr
+FROM `main`.`dbdemos_retail_c360`.churn_orders as c
 
-INNER JOIN `main`.`dbdemos_retail_c360`.churn_users ON churn_orders.user_id = churn_users.user_id
-GROUP BY canal;
+INNER JOIN `main`.`dbdemos_retail_c360`.churn_users AS u ON c.user_id = u.user_id
+GROUP BY c.canal;
 
 -- COMMAND ----------
 
