@@ -1,5 +1,5 @@
 -- Databricks notebook source
-CREATE SCHEMA IF NOT EXISTS `main`.`billing_forecast`;
+CREATE  SCHEMA IF NOT EXISTS `main`.`billing_forecast`;
 CREATE TABLE IF NOT EXISTS `main`.`billing_forecast`.billing_forecast (sku STRING, workspace_id STRING);
 INSERT INTO `main`.`billing_forecast`.billing_forecast (sku, workspace_id) SELECT 'ALL', 'ALL'
   WHERE NOT EXISTS (SELECT * FROM  `main`.`billing_forecast`.billing_forecast);

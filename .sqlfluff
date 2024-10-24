@@ -2,15 +2,13 @@
 dialect = databricks
 sql_file_exts = .sql
 exclude_rules = AL07, ST06
+max_line_length = 120
 
 [sqlfluff:aliasing:table]
 aliasing = explicit
 
 [sqlfluff:indentation]
 ident_unit = spaces
-
-[sqlfluff:rules:layout]
-max_line_length = 120
 
 [sqlfluff:layout:type:binary_operator]
 line_position = leading

@@ -5,7 +5,7 @@ SELECT p.country, p.churn, count(*) as customers
 
 -- COMMAND ----------
 
-SELECT canal, sum(amount)/100 as MRR FROM `main`.`dbdemos_retail_c360`.churn_orders o 
+SELECT canal,sum(amount)/100 as MRR FROM `main`.`dbdemos_retail_c360`.churn_orders o 
 		INNER JOIN `main`.`dbdemos_retail_c360`.churn_users using (user_id)
     group by canal;
 
