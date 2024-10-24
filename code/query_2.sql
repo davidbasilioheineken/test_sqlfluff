@@ -1,7 +1,6 @@
 -- Databricks notebook source
 SELECT
-    p.country AS mex,
-    p.churn AS c,
+    p.country AS mex,    p.churn AS c,
     COUNT(*) AS customers
 FROM `main`.`dbdemos_retail_c360`.churn_features AS p
 GROUP BY p.country, p.churn
@@ -12,6 +11,7 @@ SELECT
     canal,
     SUM(amount) / 100 AS mrr
 FROM `main`.`dbdemos_retail_c360`.churn_orders
+
 INNER JOIN `main`.`dbdemos_retail_c360`.churn_users ON churn_orders.user_id = churn_users.user_id
 GROUP BY canal;
 
