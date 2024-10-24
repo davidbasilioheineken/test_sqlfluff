@@ -31,10 +31,14 @@ WITH customer_total_return AS (
         sr_customer_sk,
         sr_store_sk
 )
-SELECT ctr_customer_sk, ctr_store_sk, ctr_total_return
+
+SELECT
+    ctr_customer_sk,
+    ctr_store_sk,
+    ctr_total_return
 FROM customer_total_return AS ctr1,
-    store as s,
-    customer c
+    store AS s,
+    customer AS c
 WHERE
     ctr1.ctr_total_return > (
         SELECT AVG(ctr_total_return) * 1.2
