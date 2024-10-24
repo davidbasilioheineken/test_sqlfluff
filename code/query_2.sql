@@ -11,7 +11,7 @@ GROUP BY p.country, p.churn
 SELECT
     c.canal,
     SUM(u.amount) / 100 AS mrr
-FROM `main`.`dbdemos_retail_c360`.churn_orders as c
+FROM `main`.`dbdemos_retail_c360`.churn_orders AS c
 
 INNER JOIN `main`.`dbdemos_retail_c360`.churn_users AS u ON c.user_id = u.user_id
 GROUP BY c.canal;
