@@ -2,7 +2,7 @@
 CREATE OR REFRESH STREAMING TABLE tbl_mae (
     CONSTRAINT valid_records
     EXPECT (
-        num_cliente2 IS NOT NULL
+        num_cliente IS NOT NULL
         AND nombre_cliente IS NOT NULL
     )
     ON VIOLATION DROP ROW

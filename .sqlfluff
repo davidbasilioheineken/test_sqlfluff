@@ -28,9 +28,6 @@ capitalisation_policy = upper
 extended_capitalisation_policy = lower
 unquoted_identifiers_policy = all
 
-[sqlfluff:rules:identifiers]
-allowed_characters = letters, underscores
-
 [sqlfluff:rules:capitalisation.functions]
 extended_capitalisation_policy = upper
 
