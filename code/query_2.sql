@@ -31,19 +31,18 @@ WITH customer_total_return AS (
         sr_customer_sk,
         sr_store_sk
 )
-
-SELECT *
+SELECT ctr_customer_sk, ctr_store_sk, ctr_total_return
 FROM customer_total_return AS ctr1,
-    store,
-    customer
+    store as s,
+    customer c
 WHERE
     ctr1.ctr_total_return > (
         SELECT AVG(ctr_total_return) * 1.2
         FROM customer_total_return AS ctr2
         WHERE ctr1.ctr_store_sk = ctr2.ctr_store_sk
     )
-    AND s_store_sk = ctr1.ctr_store_sk
-    AND s_state = 'TN'
-    AND ctr1.ctr_customer_sk = c_customer_sk
-ORDER BY c_customer_id
+    AND s.store_sk = ctr1.ctr_store_sk
+    AND s.state = 'TN'
+    AND ctr1.ctr_customer_sk = c.customer_sk
+ORDER BY c.customer_id
 LIMIT 100;
