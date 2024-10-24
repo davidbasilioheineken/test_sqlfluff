@@ -33,15 +33,15 @@ WITH customer_total_return AS (
 )
 
 SELECT
-    ctr_customer_sk,
-    ctr_store_sk,
-    ctr_total_return
+    ctr1.ctr_customer_sk,
+    ctr1.ctr_store_sk,
+    ctr1.ctr_total_return
 FROM customer_total_return AS ctr1,
     store AS s,
     customer AS c
 WHERE
     ctr1.ctr_total_return > (
-        SELECT AVG(ctr_total_return) * 1.2
+        SELECT AVG(ctr1.ctr_total_return) * 1.2
         FROM customer_total_return AS ctr2
         WHERE ctr1.ctr_store_sk = ctr2.ctr_store_sk
     )
