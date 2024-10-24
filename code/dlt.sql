@@ -1,8 +1,8 @@
 -- Databricks notebook source
-CREATE OR REFRESH STREAMING TABLE tbl_stg_mae (
+CREATE OR REFRESH STREAMING TABLE tbl_MAE (
     CONSTRAINT valid_records
     EXPECT (
-        num_cliente IS NOT NULL
+        num_cliente2 IS NOT NULL
         AND nombre_cliente IS NOT NULL
     )
     ON VIOLATION DROP ROW
