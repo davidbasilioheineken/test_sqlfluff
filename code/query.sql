@@ -2,8 +2,8 @@
 CREATE SCHEMA IF NOT EXISTS `main`.`billing_forecast`;
 CREATE TABLE IF NOT EXISTS `main`.`billing_forecast`.billing_forecast (sku STRING, workspace_id STRING);
 INSERT INTO `main`.`billing_forecast`.billing_forecast (sku, workspace_id) SELECT
-    'ALL'  a, 
-    'ALL'  b
+    'ALL' AS a,
+    'ALL' AS b
 WHERE NOT EXISTS (SELECT * FROM `main`.`billing_forecast`.billing_forecast);
 
 -- COMMAND ----------
