@@ -1,5 +1,5 @@
 -- Databricks notebook source
-create or refresh streaming table tbl_stg_mae (
+create or refresh  streaming table tbl_stg_mae (
     constraint valid_records
     expect (
         num_cliente is not null
