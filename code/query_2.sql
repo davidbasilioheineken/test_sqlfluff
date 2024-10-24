@@ -8,7 +8,7 @@ GROUP BY p.country, p.churn
 -- COMMAND ----------
 
 SELECT
-    canal,
+    canal, 
     SUM(amount) / 100 AS mrr
 FROM `main`.`dbdemos_retail_c360`.churn_orders
 

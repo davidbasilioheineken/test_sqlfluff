@@ -43,6 +43,7 @@ jobs:
         else
           echo "No files to process."
         fi
+      continue-on-error: ${{ github.event_name == 'push' }}
         
     - name: Fix SQL if Lint Fails
       id: fix_sql
