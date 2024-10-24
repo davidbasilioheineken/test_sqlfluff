@@ -11,45 +11,46 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
 
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
-    - name: Install SQLFluff
-      run: pip install sqlfluff
-
     - name: Identify new or modified files
       id: file_changes
       run: |
-        # Get the list of new or modified files
         echo "Identifying new or modified files..."
-        git fetch origin main  # Fetch the main branch
-        FILES=$(git diff --name-only HEAD origin/main)
-
-        if [ -z "$FILES" ]; then
+        files=$(git diff --name-only HEAD^ HEAD| grep '\.sql$' | tr '\n' ' ' )
+        if [ -z "$files" ]; then
           echo "No new or modified files."
         else
           echo "New or modified files:"
-          echo "$FILES"
-          echo "::set-output name=changed_files::$FILES"  # Set output variable
+          echo "$files"
+          echo "FILES=$files" >> $GITHUB_ENV
         fi
 
+    - name: Install SQLFluff
+      run: pip install sqlfluff
+
     - name: Lint SQL
+      id: lint_sql
       run: |
-        if [ -n "${{ steps.file_changes.outputs.changed_files }}" ]; then
-        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff lint
+        if [ -n "${{ env.FILES }}" ]; then
+        echo "${{env.FILES}}" | xargs sqlfluff lint
         else
           echo "No files to process."
         fi
+      continue-on-error: true
         
     - name: Fix SQL if Lint Fails
-      if: failure()
+      if: steps.lint_sql.outcome == 'failure'
       run: |
-        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs sqlfluff fix
+        echo "${{env.FILES}}" | xargs sqlfluff fix
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-        echo "${{ steps.file_changes.outputs.changed_files }}" | tr ' ' '\n' | grep '\.sql$' | xargs git add
+        git add .
         git commit -m 'Auto-fix SQL file(s) with SQLFluff'
         git push origin HEAD:${{ github.ref }}
