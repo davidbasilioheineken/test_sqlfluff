@@ -7,9 +7,9 @@ exclude_rules = AL07, ST06
 aliasing = explicit
 
 [sqlfluff:indentation]
-ident_unit = space
+ident_unit = spaces
 
-[sqlfluff:layout]
+[sqlfluff:rules:layout]
 max_line_length = 120
 
 [sqlfluff:layout:type:binary_operator]
